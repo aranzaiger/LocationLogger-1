@@ -11,6 +11,7 @@ import android.content.pm.PackageManager;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
+import android.nfc.Tag;
 import android.os.Bundle;
 import android.os.IBinder;
 import android.provider.Settings;
@@ -52,6 +53,7 @@ public class GPSTracker extends Service implements LocationListener {
 
     public Location getLocation() {
         try {
+            Log.d("TAG","in get location");
             locationManager =
                     (LocationManager) mContext
                     .getSystemService(LOCATION_SERVICE);
@@ -223,6 +225,8 @@ public class GPSTracker extends Service implements LocationListener {
     }
 
     public Location getLastKnownLocation(){
+        if (location == null)
+            return getLocation();
         return location;
     }
 
