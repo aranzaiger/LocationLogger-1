@@ -8,6 +8,8 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.location.Address;
+import android.location.Geocoder;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
@@ -18,6 +20,9 @@ import android.provider.Settings;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.util.Log;
+import android.widget.Toast;
+
+import java.util.List;
 
 public class GPSTracker extends Service implements LocationListener {
 
@@ -208,6 +213,27 @@ public class GPSTracker extends Service implements LocationListener {
 
         // Showing Alert Message
         alertDialog.show();
+    }
+
+    public List<Address> getFromLocation(double latitude, double longitude, int maxResults){
+        try {
+            Geocoder geocoder;
+            List<Address> addresses;
+            geocoder = new Geocoder(this);
+            if (latitude != 0 || longitude != 0) {
+                addresses = geocoder.getFromLocation(latitude ,
+                        longitude, maxResults);
+                return addresses;
+
+            } else {
+                Toast.makeText(this, "latitude and longitude are null",
+                        Toast.LENGTH_LONG).show();
+                return null;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
     }
 
     @Override

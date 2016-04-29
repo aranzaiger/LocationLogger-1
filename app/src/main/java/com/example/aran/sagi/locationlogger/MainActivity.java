@@ -2,6 +2,7 @@ package com.example.aran.sagi.locationlogger;
 
 import android.Manifest;
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
@@ -45,6 +46,8 @@ public class MainActivity extends Activity implements AdapterView.OnItemClickLis
     protected int requestCount = 3;
     private final int SAMPLE_RATE = 5000, SAMPLE_DELAY = 1000;
     protected android.location.Location lastLocation;
+    protected ProgressDialog dialog;
+    protected String completeAddress;
 
 
     @Override
@@ -163,26 +166,7 @@ public class MainActivity extends Activity implements AdapterView.OnItemClickLis
 
 
 
-    public List<Address> getFromLocation(double latitude, double longitude, int maxResults){
-        try {
-            Geocoder geocoder;
-            List<Address> addresses;
-            geocoder = new Geocoder(this);
-            if (latitude != 0 || longitude != 0) {
-                addresses = geocoder.getFromLocation(latitude ,
-                        longitude, maxResults);
-                return addresses;
 
-            } else {
-                Toast.makeText(this, "latitude and longitude are null",
-                        Toast.LENGTH_LONG).show();
-                return null;
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-            return null;
-        }
-    }
 
     public void locationUpdateListener(android.location.Location location) {
 
@@ -253,37 +237,26 @@ public class MainActivity extends Activity implements AdapterView.OnItemClickLis
 
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-//        Runnable r = new MyThread(view);
-//        new Thread(r).start();
-        Double lat,lon;
-        String address="";
-        Log.d(TAG, "clicked position: " + position);
-        Log.d(TAG, "clicked adapterview: " + parent.toString());
-        Log.d(TAG, "clicked view: " + view.toString());
-        Log.d(TAG, "clicked id: " + id);
 
-        lat = Double.parseDouble(((TextView)view.findViewById(R.id.lbl_lat)).getText().toString());
-        lon = Double.parseDouble(((TextView)view.findViewById(R.id.lbl_lng)).getText().toString());
+        Log.d(TAG,"Loading");
+        dialog = ProgressDialog.show(MainActivity.this, "",
+                "Loading. Please wait...", true);
 
-        Log.d(TAG, "clicked lat: " + lat);
-        Log.d(TAG, "clicked lon: " + lon);
-
-
-        List<Address> listAddress = getFromLocation(lat,lon,1);
-        Log.d(TAG, "listaddress size: "+ listAddress.size());
-        Log.d(TAG, "listaddress this: "+ listAddress.toString());
-        Log.d(TAG, "listaddress at 0 max line : "+ listAddress.get(0).getMaxAddressLineIndex());
-
-        for (int i = 0; i <= listAddress.get(0).getMaxAddressLineIndex(); i++) {
-            listAddress.get(0).getAddressLine(i);
-            address += listAddress.get(0).getAddressLine(i)+" ";
+        while(!dialog.isShowing());
+        Runnable r = new MyThread(view);
+        Thread t = new Thread(r);
+        t.start();
+        try {
+            t.join();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
         }
-        Log.d(TAG, "listaddress at 0 full address : "+ address);
-        address_tv.setText(address);
+        dialog.dismiss();
+        Log.d(TAG,"DONE");
 
-
+        address_tv.setText(completeAddress);
     }
-
+//
     public class MyThread implements Runnable{
         View view;
         Double lat,lon;
@@ -295,25 +268,15 @@ public class MainActivity extends Activity implements AdapterView.OnItemClickLis
         public void run() {
             String address="";
 
-
             lat = Double.parseDouble(((TextView)view.findViewById(R.id.lbl_lat)).getText().toString());
             lon = Double.parseDouble(((TextView)view.findViewById(R.id.lbl_lng)).getText().toString());
 
-            Log.d(TAG, "clicked lat: " + lat);
-            Log.d(TAG, "clicked lon: " + lon);
-
-
-            List<Address> listAddress = getFromLocation(lat,lon,1);
-            Log.d(TAG, "listaddress size: "+ listAddress.size());
-            Log.d(TAG, "listaddress this: "+ listAddress.toString());
-            Log.d(TAG, "listaddress at 0 max line : "+ listAddress.get(0).getMaxAddressLineIndex());
-
+            List<Address> listAddress = gpsTracker.getFromLocation(lat,lon,1);
             for (int i = 0; i <= listAddress.get(0).getMaxAddressLineIndex(); i++) {
                 listAddress.get(0).getAddressLine(i);
                 address += listAddress.get(0).getAddressLine(i)+" ";
             }
-            Log.d(TAG, "listaddress at 0 full address : "+ address);
-            address_tv.setText(address);
+            completeAddress = address;
         }
     }
 

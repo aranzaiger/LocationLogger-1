@@ -11,18 +11,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="dd1c710d-7883-4526-8136-b1b6153ee0a0" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/animated_vector_drawable_23_3_0.xml" afterPath="$PROJECT_DIR$/.idea/libraries/animated_vector_drawable_23_3_0.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/appcompat_v7_23_3_0.xml" afterPath="$PROJECT_DIR$/.idea/libraries/appcompat_v7_23_3_0.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/support_annotations_23_3_0.xml" afterPath="$PROJECT_DIR$/.idea/libraries/support_annotations_23_3_0.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/support_v4_23_3_0.xml" afterPath="$PROJECT_DIR$/.idea/libraries/support_v4_23_3_0.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/support_vector_drawable_23_3_0.xml" afterPath="$PROJECT_DIR$/.idea/libraries/support_vector_drawable_23_3_0.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/misc.xml" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/modules.xml" afterPath="$PROJECT_DIR$/.idea/modules.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/example/aran/sagi/locationlogger/GPSTracker.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/aran/sagi/locationlogger/GPSTracker.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/example/aran/sagi/locationlogger/Location.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/aran/sagi/locationlogger/Location.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/example/aran/sagi/locationlogger/MainActivity.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/aran/sagi/locationlogger/MainActivity.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build.gradle" afterPath="$PROJECT_DIR$/build.gradle" />
     </list>
     <ignored path="LocationLogger.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -53,15 +44,15 @@
       <file leaf-file-name="MainActivity.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/aran/sagi/locationlogger/MainActivity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="1.6646885">
-              <caret line="282" column="0" selection-start-line="282" selection-start-column="0" selection-end-line="282" selection-end-column="0" />
+            <state vertical-scroll-proportion="0.33531156">
+              <caret line="244" column="24" selection-start-line="244" selection-start-column="24" selection-end-line="244" selection-end-column="24" />
               <folding>
-                <element signature="e#3897#4987#0" expanded="true" />
-                <element signature="e#4986#4987#0" expanded="true" />
-                <element signature="e#5033#5800#0" expanded="true" />
-                <element signature="e#5799#5800#0" expanded="true" />
-                <element signature="e#10916#10917#0" expanded="true" />
-                <element signature="e#10956#10957#0" expanded="true" />
+                <element signature="e#4007#5097#0" expanded="true" />
+                <element signature="e#5096#5097#0" expanded="true" />
+                <element signature="e#5143#5910#0" expanded="true" />
+                <element signature="e#5909#5910#0" expanded="true" />
+                <element signature="e#9581#9582#0" expanded="true" />
+                <element signature="e#9621#9622#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -71,7 +62,7 @@
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/aran/sagi/locationlogger/GPSTracker.java">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="71" column="23" selection-start-line="71" selection-start-column="23" selection-end-line="71" selection-end-column="23" />
+              <caret line="225" column="33" selection-start-line="225" selection-start-column="33" selection-end-line="225" selection-end-column="33" />
               <folding />
             </state>
           </provider>
@@ -2101,6 +2092,13 @@
       <option name="number" value="Default" />
       <updated>1461780900749</updated>
     </task>
+    <task id="LOCAL-00001" summary="search added &amp; address thread started&#10;&#10;added possibility to search by lat or lon">
+      <created>1461951654329</created>
+      <option name="number" value="00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1461951654329</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -2113,7 +2111,7 @@
       <window_info id="Palette&#9;" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4129693" sideWeight="0.5075643" order="8" side_tool="true" content_ui="tabs" />
-      <window_info id="Android Monitor" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.55119455" sideWeight="0.4924357" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Android Monitor" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3566553" sideWeight="0.4924357" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32764506" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32924107" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32593855" sideWeight="0.4978678" order="12" side_tool="false" content_ui="tabs" />
@@ -2148,6 +2146,10 @@
   <component name="VcsContentAnnotationSettings">
     <option name="myLimit" value="2678400000" />
   </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="search added &amp; address thread started&#10;&#10;added possibility to search by lat or lon" />
+    <option name="LAST_COMMIT_MESSAGE" value="search added &amp; address thread started&#10;&#10;added possibility to search by lat or lon" />
+  </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
     <watches-manager />
@@ -2181,12 +2183,12 @@
         <state vertical-scroll-proportion="0.0">
           <caret line="57" column="28" selection-start-line="57" selection-start-column="20" selection-end-line="57" selection-end-column="28" />
           <folding>
-            <element signature="e#3897#4987#0" expanded="true" />
-            <element signature="e#4986#4987#0" expanded="true" />
-            <element signature="e#5033#5800#0" expanded="true" />
-            <element signature="e#5799#5800#0" expanded="true" />
-            <element signature="e#10916#10917#0" expanded="true" />
-            <element signature="e#10956#10957#0" expanded="true" />
+            <element signature="e#4007#5097#0" expanded="true" />
+            <element signature="e#5096#5097#0" expanded="true" />
+            <element signature="e#5143#5910#0" expanded="true" />
+            <element signature="e#5909#5910#0" expanded="true" />
+            <element signature="e#9581#9582#0" expanded="true" />
+            <element signature="e#9621#9622#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -2267,12 +2269,12 @@
         <state vertical-scroll-proportion="0.0">
           <caret line="62" column="49" selection-start-line="62" selection-start-column="49" selection-end-line="62" selection-end-column="49" />
           <folding>
-            <element signature="e#3897#4987#0" expanded="true" />
-            <element signature="e#4986#4987#0" expanded="true" />
-            <element signature="e#5033#5800#0" expanded="true" />
-            <element signature="e#5799#5800#0" expanded="true" />
-            <element signature="e#10916#10917#0" expanded="true" />
-            <element signature="e#10956#10957#0" expanded="true" />
+            <element signature="e#4007#5097#0" expanded="true" />
+            <element signature="e#5096#5097#0" expanded="true" />
+            <element signature="e#5143#5910#0" expanded="true" />
+            <element signature="e#5909#5910#0" expanded="true" />
+            <element signature="e#9581#9582#0" expanded="true" />
+            <element signature="e#9621#9622#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -2359,12 +2361,12 @@
         <state vertical-scroll-proportion="0.0">
           <caret line="63" column="23" selection-start-line="63" selection-start-column="23" selection-end-line="63" selection-end-column="23" />
           <folding>
-            <element signature="e#3897#4987#0" expanded="true" />
-            <element signature="e#4986#4987#0" expanded="true" />
-            <element signature="e#5033#5800#0" expanded="true" />
-            <element signature="e#5799#5800#0" expanded="true" />
-            <element signature="e#10916#10917#0" expanded="true" />
-            <element signature="e#10956#10957#0" expanded="true" />
+            <element signature="e#4007#5097#0" expanded="true" />
+            <element signature="e#5096#5097#0" expanded="true" />
+            <element signature="e#5143#5910#0" expanded="true" />
+            <element signature="e#5909#5910#0" expanded="true" />
+            <element signature="e#9581#9582#0" expanded="true" />
+            <element signature="e#9621#9622#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -2445,12 +2447,12 @@
         <state vertical-scroll-proportion="0.0">
           <caret line="33" column="56" selection-start-line="33" selection-start-column="56" selection-end-line="33" selection-end-column="56" />
           <folding>
-            <element signature="e#3897#4987#0" expanded="true" />
-            <element signature="e#4986#4987#0" expanded="true" />
-            <element signature="e#5033#5800#0" expanded="true" />
-            <element signature="e#5799#5800#0" expanded="true" />
-            <element signature="e#10916#10917#0" expanded="true" />
-            <element signature="e#10956#10957#0" expanded="true" />
+            <element signature="e#4007#5097#0" expanded="true" />
+            <element signature="e#5096#5097#0" expanded="true" />
+            <element signature="e#5143#5910#0" expanded="true" />
+            <element signature="e#5909#5910#0" expanded="true" />
+            <element signature="e#9581#9582#0" expanded="true" />
+            <element signature="e#9621#9622#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -2582,22 +2584,22 @@
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/aran/sagi/locationlogger/GPSTracker.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="71" column="23" selection-start-line="71" selection-start-column="23" selection-end-line="71" selection-end-column="23" />
+          <caret line="225" column="33" selection-start-line="225" selection-start-column="33" selection-end-line="225" selection-end-column="33" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/aran/sagi/locationlogger/MainActivity.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="1.6646885">
-          <caret line="282" column="0" selection-start-line="282" selection-start-column="0" selection-end-line="282" selection-end-column="0" />
+        <state vertical-scroll-proportion="0.33531156">
+          <caret line="244" column="24" selection-start-line="244" selection-start-column="24" selection-end-line="244" selection-end-column="24" />
           <folding>
-            <element signature="e#3897#4987#0" expanded="true" />
-            <element signature="e#4986#4987#0" expanded="true" />
-            <element signature="e#5033#5800#0" expanded="true" />
-            <element signature="e#5799#5800#0" expanded="true" />
-            <element signature="e#10916#10917#0" expanded="true" />
-            <element signature="e#10956#10957#0" expanded="true" />
+            <element signature="e#4007#5097#0" expanded="true" />
+            <element signature="e#5096#5097#0" expanded="true" />
+            <element signature="e#5143#5910#0" expanded="true" />
+            <element signature="e#5909#5910#0" expanded="true" />
+            <element signature="e#9581#9582#0" expanded="true" />
+            <element signature="e#9621#9622#0" expanded="true" />
           </folding>
         </state>
       </provider>
