@@ -51,6 +51,15 @@ public class GPSTracker extends Service implements LocationListener {
         getLocation();
     }
 
+    public void stopLocationManager() {
+       try {
+           locationManager.removeUpdates(this);
+       }
+       catch(SecurityException e){
+
+       }
+    }
+
     public Location getLocation() {
         try {
             Log.d("TAG","in get location");

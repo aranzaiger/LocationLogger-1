@@ -99,4 +99,49 @@ public class Location {
         }
         return c;
     }
+
+    public static Cursor getByLat(DBHelper dbHelper, int lat){
+        SQLiteDatabase db = dbHelper.getReadableDatabase();
+        String[] selectionArgs = {};
+        Cursor c = db.rawQuery("SELECT * FROM " + appDB.LocationsEntry.TABLE_NAME+
+                " WHERE "+appDB.LocationsEntry.LAT+" >= "+lat+
+                " AND "+appDB.LocationsEntry.LAT+" < "+(lat+1),
+                selectionArgs);
+        while(c.moveToNext()){
+            Log.d("TAG", "LAT: " + c.getDouble(c.getColumnIndex(appDB.LocationsEntry.LAT)));
+            Log.d("TAG", "LON: " + c.getDouble(c.getColumnIndex(appDB.LocationsEntry.LON)));
+        }
+        return c;
+    }
+
+    public static Cursor getByLon(DBHelper dbHelper, int lon){
+        SQLiteDatabase db = dbHelper.getReadableDatabase();
+        String[] selectionArgs = {};
+        Cursor c = db.rawQuery("SELECT * FROM " + appDB.LocationsEntry.TABLE_NAME+
+                        " WHERE "+appDB.LocationsEntry.LON+" >= "+lon+
+                        " AND "+appDB.LocationsEntry.LON+" < "+(lon+1),
+                selectionArgs);
+        while(c.moveToNext()){
+            Log.d("TAG", "LAT: " + c.getDouble(c.getColumnIndex(appDB.LocationsEntry.LAT)));
+            Log.d("TAG", "LON: " + c.getDouble(c.getColumnIndex(appDB.LocationsEntry.LON)));
+        }
+        return c;
+    }
+
+    public static Cursor getByLatAndLon(DBHelper dbHelper, int lat, int lon){
+        SQLiteDatabase db = dbHelper.getReadableDatabase();
+        String[] selectionArgs = {};
+        Cursor c = db.rawQuery("SELECT * FROM " + appDB.LocationsEntry.TABLE_NAME+
+                        " WHERE "+appDB.LocationsEntry.LAT+" >= "+lat+
+                        " AND "+appDB.LocationsEntry.LAT+" < "+(lat+1)+
+                        " AND "+appDB.LocationsEntry.LON+" >= "+lon+
+                        " AND "+appDB.LocationsEntry.LON+" < "+(lon+1),
+                selectionArgs);
+        while(c.moveToNext()){
+            Log.d("TAG", "LAT: " + c.getDouble(c.getColumnIndex(appDB.LocationsEntry.LAT)));
+            Log.d("TAG", "LON: " + c.getDouble(c.getColumnIndex(appDB.LocationsEntry.LON)));
+        }
+        return c;
+    }
+
 }
