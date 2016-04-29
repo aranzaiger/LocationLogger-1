@@ -2,9 +2,12 @@ package com.example.aran.sagi.locationlogger;
 
 import android.Manifest;
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
+import android.location.Address;
+import android.location.Geocoder;
 import android.os.Bundle;
 import android.provider.Settings;
 import android.support.v4.app.ActivityCompat;
@@ -20,6 +23,7 @@ import android.widget.SimpleCursorAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -27,6 +31,8 @@ import java.util.TimerTask;
 public class MainActivity extends Activity implements AdapterView.OnItemClickListener {
     private static final String TAG = "Ex2";
     private final int FINE_PERM = 0, COARSE_PREM=1;
+    protected String newAddress;
+
     protected EditText lat_et, lon_et;
     protected Button search_btn;
     protected TextView address_tv;
@@ -36,22 +42,38 @@ public class MainActivity extends Activity implements AdapterView.OnItemClickLis
     protected Cursor locations;
     protected DBHelper dbHelper;
     protected GPSTracker gpsTracker;
-    protected Boolean locationPermission;
+    protected Boolean locationPermission, addressChanged;
     protected int requestCount = 3;
     private final int SAMPLE_RATE = 5000, SAMPLE_DELAY = 1000;
     protected android.location.Location lastLocation;
+    protected ProgressDialog dialog;
+    protected String completeAddress;
 
+
+    @Override
+    public void onDestroy() {
+        gpsTracker.stopLocationManager();
+        super.onDestroy();
+    }
+    @Override
+    public void onPause() {
+        gpsTracker.stopLocationManager();
+        super.onPause();
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        this.locationPermission = false;
+        this.locationPermission = true;
 //        getPemissions();
         ActivityCompat.requestPermissions(this,  new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, FINE_PERM);
+
+
         Log.d("TAG", "=============================== NEW =====================");
         dbHelper = DBHelper.getInstance(this);
         locations = Location.getAll(dbHelper);
+
         Log.d("TAG","++++++++++++++locations size: "+ locations.getCount());
         lat_et = (EditText) findViewById(R.id.lat_editText);
         lon_et = (EditText) findViewById(R.id.lon_editText);
@@ -59,22 +81,71 @@ public class MainActivity extends Activity implements AdapterView.OnItemClickLis
         address_tv = (TextView) findViewById(R.id.address_text);
 
         location_lv = (ListView) findViewById(R.id.location_list);
+        gpsTracker = new GPSTracker(this);
 
         String[] from = {appDB.LocationsEntry.LAT, appDB.LocationsEntry.LON, appDB.LocationsEntry.TIME_STAMP};
         int[] to = {R.id.lbl_lat, R.id.lbl_lng, R.id.lbl_time};
 
-        location_adapter = new SimpleCursorAdapter(this, R.layout.location_item_layout, null, from, to, CursorAdapter.FLAG_REGISTER_CONTENT_OBSERVER);
+        location_adapter = new SimpleCursorAdapter(this, R.layout.location_item_layout, null, from, to);
         location_item = getLayoutInflater().inflate(R.layout.location_item_layout, null);
 
 //        location_lv.addHeaderView(location_item);
 
+        addressChanged = false;
         location_lv.setAdapter(location_adapter);
         location_lv.setOnItemClickListener(this);
+
+
+
+        location_adapter.setViewBinder(new SimpleCursorAdapter.ViewBinder() {
+            public boolean setViewValue(View view, Cursor cursor, int columnIndex) {
+                if (columnIndex == 2 || columnIndex==1){
+                    Double loc = cursor.getDouble(columnIndex);
+                    TextView textView = (TextView) view;
+                    textView.setText(String.format("%.7f", loc));
+                    return true;
+            }
+            return false;
+
+            }
+        });
+
+
+        search_btn.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                String tempLat, tempLon;
+                tempLat = lat_et.getText().toString();
+                tempLon = lon_et.getText().toString();
+
+                //both missing
+                if (tempLat.isEmpty() && tempLon.isEmpty()){
+                    locations = Location.getAll(dbHelper);
+                }
+                //only got lon
+                else if(tempLat.isEmpty() && !tempLon.isEmpty()) {
+                    locations = Location.getByLon(dbHelper,   Integer.parseInt(tempLon));
+                }
+                //only got lat
+                else if(!tempLat.isEmpty() && tempLon.isEmpty()) {
+                    locations = Location.getByLat(dbHelper,   Integer.parseInt(tempLat));
+                }
+                //got both lat & lon
+                else {
+                    locations = Location.getByLatAndLon(dbHelper,   Integer.parseInt(tempLat),   Integer.parseInt(tempLon));
+                }
+
+                location_adapter.changeCursor(locations);
+
+            }
+        });
+
+
 
         new Timer().scheduleAtFixedRate(new TimerTask() {
                                             @Override
                                             public void run() {
                                                 if(!locationPermission){
+                                                    Log.d(TAG,"No permission for location");
                                                     return;
                                                 }
                                                 Log.d("TAG", "Getting location...");
@@ -93,10 +164,8 @@ public class MainActivity extends Activity implements AdapterView.OnItemClickLis
     }
 
 
-    @Override
-    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-        Log.d(TAG, "clicked position: " + position);
-    }
+
+
 
 
     public void locationUpdateListener(android.location.Location location) {
@@ -165,5 +234,53 @@ public class MainActivity extends Activity implements AdapterView.OnItemClickLis
             // permissions this app might request
         }
     }
+
+    @Override
+    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+        Log.d(TAG,"Loading");
+        dialog = ProgressDialog.show(MainActivity.this, "",
+                "Loading. Please wait...", true);
+
+        while(!dialog.isShowing());
+        Runnable r = new MyThread(view);
+        Thread t = new Thread(r);
+        t.start();
+        try {
+            t.join();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        dialog.dismiss();
+        Log.d(TAG,"DONE");
+
+        address_tv.setText(completeAddress);
+    }
+//
+    public class MyThread implements Runnable{
+        View view;
+        Double lat,lon;
+
+        public MyThread(View view) {
+            this.view = view;
+        }
+        @Override
+        public void run() {
+            String address="";
+
+            lat = Double.parseDouble(((TextView)view.findViewById(R.id.lbl_lat)).getText().toString());
+            lon = Double.parseDouble(((TextView)view.findViewById(R.id.lbl_lng)).getText().toString());
+
+            List<Address> listAddress = gpsTracker.getFromLocation(lat,lon,1);
+            for (int i = 0; i <= listAddress.get(0).getMaxAddressLineIndex(); i++) {
+                listAddress.get(0).getAddressLine(i);
+                address += listAddress.get(0).getAddressLine(i)+" ";
+            }
+            completeAddress = address;
+        }
+    }
+
+
+
 }
 
